@@ -2,63 +2,73 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
-use Laravel\Fortify\TwoFactorAuthenticatable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, TwoFactorAuthenticatable;
+    use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+    // Mass assignable sesuai migration
     protected $fillable = [
-        'name',
-        'email',
+        'nama',
+        'username',
         'password',
+        'role',   // 'admin' | 'guru'
+        'status', // 'active' | 'inactive'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
+    // Sembunyikan password saat serialisasi
     protected $hidden = [
         'password',
-        'two_factor_secret',
-        'two_factor_recovery_codes',
-        'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    // Casts
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password' => 'hashed', // tetap hash password
         ];
     }
 
-    /**
-     * Get the user's initials
-     */
+    // Accessor/Mutator agar kompatibel dengan kode lama yang pakai "name" dan "email"
+    public function getNameAttribute(): ?string
+    {
+        return $this->attributes['nama'] ?? null;
+    }
+
+    public function setNameAttribute($value): void
+    {
+        $this->attributes['nama'] = $value;
+    }
+
+    // Catatan: di schema tidak ada email, jadi map "email" ke "username" untuk kompatibilitas tampilan
+    public function getEmailAttribute(): ?string
+    {
+        return $this->attributes['username'] ?? null;
+    }
+
+    public function setEmailAttribute($value): void
+    {
+        $this->attributes['username'] = $value;
+    }
+
+    // Helper role sederhana sesuai kolom enum 'role'
+    public function hasRole(string $name): bool
+    {
+        return ($this->role ?? null) === $name;
+    }
+
+    
+    // Initials untuk UI (pakai 'nama')
     public function initials(): string
     {
-        return Str::of($this->name)
+        return Str::of($this->name ?? '')
             ->explode(' ')
             ->take(2)
-            ->map(fn ($word) => Str::substr($word, 0, 1))
+            ->map(fn ($w) => Str::substr($w, 0, 1))
             ->implode('');
     }
 }
