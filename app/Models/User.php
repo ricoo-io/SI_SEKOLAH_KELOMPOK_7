@@ -11,29 +11,31 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    // Mass assignable sesuai migration
     protected $fillable = [
         'nama',
         'username',
         'password',
-        'role',   // 'admin' | 'guru'
-        'status', // 'active' | 'inactive'
+        'role',
     ];
 
-    // Sembunyikan password saat serialisasi
     protected $hidden = [
         'password',
     ];
 
-    // Casts
     protected function casts(): array
     {
         return [
-            'password' => 'hashed', // tetap hash password
+            'password' => 'hashed', 
         ];
     }
 
-    // Accessor/Mutator agar kompatibel dengan kode lama yang pakai "name" dan "email"
+    // Relationship dengan Guru
+    public function guru()
+    {
+        return $this->hasOne(Guru::class, 'id_user');
+    }
+
+    // Accessors
     public function getNameAttribute(): ?string
     {
         return $this->attributes['nama'] ?? null;
@@ -44,31 +46,63 @@ class User extends Authenticatable
         $this->attributes['nama'] = $value;
     }
 
-    // Catatan: di schema tidak ada email, jadi map "email" ke "username" untuk kompatibilitas tampilan
-    public function getEmailAttribute(): ?string
+    public function getUsernameAttribute(): ?string
     {
         return $this->attributes['username'] ?? null;
     }
 
-    public function setEmailAttribute($value): void
+    public function setUsernameAttribute($value): void
     {
         $this->attributes['username'] = $value;
     }
 
-    // Helper role sederhana sesuai kolom enum 'role'
+    // Role checks
     public function hasRole(string $name): bool
     {
         return ($this->role ?? null) === $name;
     }
 
-    
-    // Initials untuk UI (pakai 'nama')
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isGuru(): bool
+    {
+        return $this->role === 'guru';
+    }
+
+    // Helper methods menggunakan relasi guru
+    public function isWaliKelas(): bool
+    {
+        if (!$this->isGuru() || !$this->guru) {
+            return false;
+        }
+        return in_array($this->guru->status, ['wali_kelas', 'keduanya']);
+    }
+
+    public function isGuruMapel(): bool
+    {
+        if (!$this->isGuru() || !$this->guru) {
+            return false;
+        }
+        return in_array($this->guru->status, ['guru_mapel', 'keduanya']);
+    }
+
+    public function getGuruType(): ?string
+    {
+        if (!$this->isGuru() || !$this->guru) {
+            return null;
+        }
+        return $this->guru->status;
+    }
+
     public function initials(): string
     {
-        return Str::of($this->name ?? '')
+        return Str::of($this->nama ?? '')
             ->explode(' ')
             ->take(2)
-            ->map(fn ($w) => Str::substr($w, 0, 1))
+            ->map(fn ($w) => Str::upper(Str::substr($w, 0, 1)))
             ->implode('');
     }
 }

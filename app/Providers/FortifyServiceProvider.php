@@ -34,7 +34,6 @@ class FortifyServiceProvider extends ServiceProvider
         // Optional: custom auth check (e.g., only active users)
         Fortify::authenticateUsing(function (Request $request) {
             $user = User::where('username', $request->username)
-                ->where('status', 'active')
                 ->first();
 
             return ($user && Hash::check($request->password, $user->password)) ? $user : null;

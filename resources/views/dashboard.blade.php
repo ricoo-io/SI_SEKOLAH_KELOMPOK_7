@@ -1,24 +1,25 @@
+
+@php
+    // Dummy role detection (sesuaikan dengan implementasi nyata Anda)
+    $user = auth()->user();
+    $isAdmin = method_exists($user, 'hasRole') ? $user->hasRole('admin') : (($user->role ?? '') === 'admin');
+    $isGuru = method_exists($user, 'hasRole') ? $user->hasRole('guru') : (($user->role ?? '') === 'guru');
+
+    // Dummy flags untuk guru (sementara)
+    $guruTeachesMapel = method_exists($user, 'teachesMapel') ? $user->teachesMapel() : true; // anggap guru mengajar mapel
+    $isWaliKelas = method_exists($user, 'isWaliKelas') ? $user->isWaliKelas() : true; // anggap juga wali kelas
+
+    // Data dummy ringkasan (ganti dengan query nyata nanti)
+    $stat = [
+        'siswa' => 320,
+        'kelas' => 12,
+        'mapel' => 15,
+        'nilaiBelumLengkap' => 28,
+        'absensiHariIni' => 96,
+    ];
+@endphp
+    
 <x-layouts.app :title="__('Dashboard')">
-    @php
-        // Dummy role detection (sesuaikan dengan implementasi nyata Anda)
-        $user = auth()->user();
-        $isAdmin = method_exists($user, 'hasRole') ? $user->hasRole('admin') : (($user->role ?? '') === 'admin');
-        $isGuru = method_exists($user, 'hasRole') ? $user->hasRole('guru') : (($user->role ?? '') === 'guru');
-
-        // Dummy flags untuk guru (sementara)
-        $guruTeachesMapel = method_exists($user, 'teachesMapel') ? $user->teachesMapel() : true; // anggap guru mengajar mapel
-        $isWaliKelas = method_exists($user, 'isWaliKelas') ? $user->isWaliKelas() : true; // anggap juga wali kelas
-
-        // Data dummy ringkasan (ganti dengan query nyata nanti)
-        $stat = [
-            'siswa' => 320,
-            'kelas' => 12,
-            'mapel' => 15,
-            'nilaiBelumLengkap' => 28,
-            'absensiHariIni' => 96,
-        ];
-    @endphp
-
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
         <!-- Kartu ringkasan -->
         <div class="grid auto-rows-min gap-4 md:grid-cols-3">
