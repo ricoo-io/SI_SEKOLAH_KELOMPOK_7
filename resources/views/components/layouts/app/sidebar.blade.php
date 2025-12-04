@@ -48,7 +48,7 @@
 
                 {{-- Admin Menus --}}
                 @if($isAdmin)
-                    <flux:navlist.group :heading="__('Manajemen Data Siswa')" class="grid">
+                    {{--<flux:navlist.group :heading="__('Manajemen Data Siswa')" class="grid">
                         <flux:navlist.item icon="user-plus" :href="route('students.create')" :current="request()->routeIs('students.create')" wire:navigate>{{ __('Input Data Siswa') }}</flux:navlist.item>
                         <flux:navlist.item icon="user-pen" :href="route('students.index')" :current="request()->routeIs('students.index')" wire:navigate>{{ __('Update Data Siswa') }}</flux:navlist.item>
                         <flux:navlist.item icon="arrow-up-narrow-wide" :href="route('students.promote')" :current="request()->routeIs('students.promote')" wire:navigate>{{ __('Kenaikan Kelas') }}</flux:navlist.item>
@@ -72,7 +72,7 @@
                         <flux:navlist.item icon="table-cells" :href="route('reports.leger')" :current="request()->routeIs('reports.leger')" wire:navigate>{{ __('Leger Kelas') }}</flux:navlist.item>
                         <flux:navlist.item icon="trophy" :href="route('reports.ranking')" :current="request()->routeIs('reports.ranking')" wire:navigate>{{ __('Peringkat Kelas') }}</flux:navlist.item>
                         <flux:navlist.item icon="check-badge" :href="route('reports.kkm')" :current="request()->routeIs('reports.kkm')" wire:navigate>{{ __('Laporan Ketuntasan KKM') }}</flux:navlist.item>
-                    </flux:navlist.group>
+                    </flux:navlist.group>--}}
                 @endif
 
                 {{-- Guru Menus --}}

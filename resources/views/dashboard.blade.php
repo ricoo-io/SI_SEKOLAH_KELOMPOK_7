@@ -73,8 +73,8 @@
                             </li>
                         </ul>
                         <div class="mt-4 flex gap-2">
-                            <a class="btn btn-primary" href="{{ route('monitoring.missing-scores') }}" wire:navigate>Cek Kekosongan</a>
-                            <a class="btn btn-outline" href="{{ route('monitoring.analytics') }}" wire:navigate>Visualisasi</a>
+                            {{-- <a class="btn btn-primary" href="{{ route('monitoring.missing-scores') }}" wire:navigate>Cek Kekosongan</a> --}}
+                            {{--<a class="btn btn-outline" href="{{ route('monitoring.analytics') }}" wire:navigate>Visualisasi</a> --}}
                         </div>
                     </div>
 
@@ -85,10 +85,10 @@
                             <x-icon name="cog-6-tooth" class="size-6 text-neutral-400" />
                         </div>
                         <div class="mt-3 grid gap-2 sm:grid-cols-2">
-                            <a class="btn btn-outline w-full" href="{{ route('students.create') }}" wire:navigate>Input Data Siswa</a>
-                            <a class="btn btn-outline w-full" href="{{ route('students.promote') }}" wire:navigate>Kenaikan Kelas</a>
-                            <a class="btn btn-outline w-full" href="{{ route('subjects.index') }}" wire:navigate>Data Mapel & KKM</a>
-                            <a class="btn btn-outline w-full" href="{{ route('homeroom.assignments') }}" wire:navigate>Plot Wali Kelas</a>
+                            {{-- <a class="btn btn-outline w-full" href="{{ route('students.create') }}" wire:navigate>Input Data Siswa</a> --}}
+                            {{--<a class="btn btn-outline w-full" href="{{ route('students.promote') }}" wire:navigate>Kenaikan Kelas</a>--}}
+                           {{-- <a class="btn btn-outline w-full" href="{{ route('subjects.index') }}" wire:navigate>Data Mapel & KKM</a>--}}
+                           {{-- <a class="btn btn-outline w-full" href="{{ route('homeroom.assignments') }}" wire:navigate>Plot Wali Kelas</a>--}}
                         </div>
                     </div>
 
@@ -99,10 +99,10 @@
                             <x-icon name="document-text" class="size-6 text-neutral-400" />
                         </div>
                         <div class="mt-3 flex flex-wrap gap-2">
-                            <a class="btn btn-outline" href="{{ route('reports.rapor') }}" wire:navigate>Rapor (PDF)</a>
-                            <a class="btn btn-outline" href="{{ route('reports.leger') }}" wire:navigate>Leger Kelas</a>
-                            <a class="btn btn-outline" href="{{ route('reports.ranking') }}" wire:navigate>Peringkat</a>
-                            <a class="btn btn-outline" href="{{ route('reports.kkm') }}" wire:navigate>Ketuntasan KKM</a>
+                            {{--<a class="btn btn-outline" href="{{ route('reports.rapor') }}" wire:navigate>Rapor (PDF)</a>--}}
+                           {{-- <a class="btn btn-outline" href="{{ route('reports.leger') }}" wire:navigate>Leger Kelas</a>--}}
+                            {{--<a class="btn btn-outline" href="{{ route('reports.ranking') }}" wire:navigate>Peringkat</a>--}}
+                           {{-- <a class="btn btn-outline" href="{{ route('reports.kkm') }}" wire:navigate>Ketuntasan KKM</a>--}}
                         </div>
                     </div>
                 </div>
