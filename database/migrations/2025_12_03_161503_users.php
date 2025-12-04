@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id('id');
             $table->string('nama');
-            $table->string('username')->unique();
+            $table->string('nip')->unique(); 
             $table->string('password');
             $table->enum('role', ['admin', 'guru']);
+            $table->enum('wali_kelas',['True', 'False'])->default('False');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('users');
     }
 };

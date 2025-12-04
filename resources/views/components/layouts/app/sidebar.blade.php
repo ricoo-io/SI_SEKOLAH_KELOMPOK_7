@@ -12,54 +12,20 @@
             </a>
 
             <flux:navlist variant="outline">
-                @if(auth()->user()->isAdmin())
-                    {{-- Menu Admin --}}
-                    <flux:navlist.group :heading="__('Menu Admin')" class="grid">
-                        <flux:navlist.item icon="home" :href="route('dashboard.admin')" :current="request()->routeIs('dashboard.admin')" wire:navigate>
-                            {{ __('Dashboard') }}
-                        </flux:navlist.item>
-                        <flux:navlist.item icon="users" href="#" wire:navigate>
-                            {{ __('Manajemen User') }}
-                        </flux:navlist.item>
-                        <flux:navlist.item icon="database" href="#" wire:navigate>
-                            {{ __('Data Master') }}
-                        </flux:navlist.item>
-                        <flux:navlist.item icon="book-open" href="#" wire:navigate>
-                            {{ __('Manajemen Akademik') }}
-                        </flux:navlist.item>
-                        <flux:navlist.item icon="document-text" href="#" wire:navigate>
-                            {{ __('Laporan') }}
-                        </flux:navlist.item>
-                    </flux:navlist.group>
-                @endif
-
-                @if(auth()->user()->isGuru())
-                    {{-- Menu Guru --}}
-                    <flux:navlist.group :heading="__('Menu Guru')" class="grid">
-                        <flux:navlist.item icon="home" :href="route('dashboard.guru')" :current="request()->routeIs('dashboard.guru')" wire:navigate>
-                            {{ __('Dashboard') }}
-                        </flux:navlist.item>
-                        
-                        @if(auth()->user()->isWaliKelas())
-                            <flux:navlist.item icon="users" href="#" wire:navigate>
-                                {{ __('Data Kelas') }}
-                            </flux:navlist.item>
-                        @endif
-                        
-                        @if(auth()->user()->isGuruMapel())
-                            <flux:navlist.item icon="book-open" href="#" wire:navigate>
-                                {{ __('Mata Pelajaran') }}
-                            </flux:navlist.item>
-                        @endif
-                    </flux:navlist.group>
-                @endif
+                <flux:navlist.group :heading="__('Manajemen Akademik')" class="grid">
+                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                </flux:navlist.group>
             </flux:navlist>
 
             <flux:spacer />
 
             <flux:navlist variant="outline">
-                <flux:navlist.item icon="information-circle" href="#" wire:navigate>
-                    {{ __('Help') }}
+                <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
+                {{ __('Repository') }}
+                </flux:navlist.item>
+
+                <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits#livewire" target="_blank">
+                {{ __('Documentation') }}
                 </flux:navlist.item>
             </flux:navlist>
 
@@ -86,7 +52,7 @@
 
                                 <div class="grid flex-1 text-start text-sm leading-tight">
                                     <span class="truncate font-semibold">{{ auth()->user()->name }}</span>
-                                    <span class="truncate text-xs text-zinc-600 dark:text-zinc-400">{{ auth()->user()->username }}</span>
+                                    <span class="truncate text-xs">{{ auth()->user()->email }}</span>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +102,7 @@
 
                                 <div class="grid flex-1 text-start text-sm leading-tight">
                                     <span class="truncate font-semibold">{{ auth()->user()->name }}</span>
-                                    <span class="truncate text-xs text-zinc-600 dark:text-zinc-400">{{ auth()->user()->username }}</span>
+                                    <span class="truncate text-xs">{{ auth()->user()->email }}</span>
                                 </div>
                             </div>
                         </div>

@@ -16,7 +16,10 @@ public function up()
             $table->foreignId('id_siswa')->constrained('siswa')->onDelete('cascade');
             $table->string('tahun_ajaran');
             $table->enum('semester', ['ganjil', 'genap']);
-            $table->string('file_path')->nullable();
+            $table->integer('sakit');
+            $table->integer('izin');
+            $table->integer('alpha');
+            $table->string('catatan_wali_kelas');
             $table->timestamps();
         });
     }

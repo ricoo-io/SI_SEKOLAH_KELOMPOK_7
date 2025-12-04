@@ -13,11 +13,9 @@ public function up()
     {
         Schema::create('guru_mata_pelajaran', function (Blueprint $table) {
             $table->id('id');
-            $table->foreignId('id_guru')->constrained('guru')->onDelete('cascade');
+            $table->foreignId('id_guru')->constrained('users')->onDelete('cascade');
             $table->foreignId('id_mapel')->constrained('mata_pelajaran')->onDelete('cascade');
             $table->foreignId('id_kelas')->constrained('kelas')->onDelete('cascade');
-            $table->string('tahun_ajaran');
-            $table->enum('semester', ['ganjil', 'genap']);
             $table->timestamps();
         });
     }

@@ -22,4 +22,14 @@ class Guru extends Model
     {
         return $this->belongsTo(User::class, 'id_user');
     }
+
+    public function isWaliKelas(): bool
+    {
+        return in_array($this->status, ['wali_kelas', 'keduanya']);
+    }
+
+    public function isGuruMapel(): bool
+    {
+        return in_array($this->status, ['guru_mapel', 'keduanya']);
+    }
 }

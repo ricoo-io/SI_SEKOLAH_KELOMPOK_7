@@ -10,14 +10,14 @@
 
             <!-- Email Address -->
             <flux:input
-                name="username"
-                :label="__('Username')"
-                :value="old('username')"
+                name="nip"
+                :label="__('Nomor Induk Pegawai')"
+                :value="old('nip')"
                 type="text"
                 required
                 autofocus
-                autocomplete="username"
-                placeholder="username"
+                autocomplete="Nomor Induk Pegawai"
+                placeholder="Nomor Induk Pegawai"
             />
 
             <!-- Password -->

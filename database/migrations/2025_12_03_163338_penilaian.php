@@ -15,9 +15,15 @@ return new class extends Migration
             $table->id('id');
             $table->foreignId('id_siswa')->constrained('siswa')->onDelete('cascade');
             $table->foreignId('id_mapel')->constrained('mata_pelajaran')->onDelete('cascade');
-            $table->foreignId('id_tugas')->constrained('guru_mata_pelajaran')->onDelete('cascade');
-            $table->integer('nilai_harian')->nullable();
+            $table->foreignId('id_guru')->constrained('guru_mata_pelajaran')->onDelete('cascade');
+            $table->enum('semester', ['ganjil', 'genap']);
+            $table->integer('nilai_harian_1')->nullable();
+            $table->integer('nilai_harian_2')->nullable();
+            $table->integer('nilai_harian_3')->nullable();
             $table->integer('nilai_UTS')->nullable();
+            $table->integer('nilai_harian_4')->nullable();
+            $table->integer('nilai_harian_5')->nullable();
+            $table->integer('nilai_harian_6')->nullable();
             $table->integer('nilai_UAS')->nullable();
             $table->integer('nilai_Akhir')->nullable();
             $table->timestamp('update_terakhir')->nullable();

@@ -13,9 +13,10 @@ class User extends Authenticatable
 
     protected $fillable = [
         'nama',
-        'username',
+        'nip',
         'password',
         'role',
+        'wali_kelas',
     ];
 
     protected $hidden = [
@@ -35,7 +36,7 @@ class User extends Authenticatable
         return $this->hasOne(Guru::class, 'id_user');
     }
 
-    // Accessors
+    // Accessors untuk 'name' (karena banyak code Laravel expect 'name')
     public function getNameAttribute(): ?string
     {
         return $this->attributes['nama'] ?? null;
@@ -46,14 +47,10 @@ class User extends Authenticatable
         $this->attributes['nama'] = $value;
     }
 
+    // Accessor untuk 'username' → gunakan 'nip' sebagai username
     public function getUsernameAttribute(): ?string
     {
-        return $this->attributes['username'] ?? null;
-    }
-
-    public function setUsernameAttribute($value): void
-    {
-        $this->attributes['username'] = $value;
+        return $this->attributes['nip'] ?? null;
     }
 
     // Role checks
@@ -72,31 +69,12 @@ class User extends Authenticatable
         return $this->role === 'guru';
     }
 
-    // Helper methods menggunakan relasi guru
     public function isWaliKelas(): bool
     {
-        if (!$this->isGuru() || !$this->guru) {
-            return false;
-        }
-        return in_array($this->guru->status, ['wali_kelas', 'keduanya']);
+        return $this->wali_kelas === 'True';
     }
 
-    public function isGuruMapel(): bool
-    {
-        if (!$this->isGuru() || !$this->guru) {
-            return false;
-        }
-        return in_array($this->guru->status, ['guru_mapel', 'keduanya']);
-    }
-
-    public function getGuruType(): ?string
-    {
-        if (!$this->isGuru() || !$this->guru) {
-            return null;
-        }
-        return $this->guru->status;
-    }
-
+    // Helper methods
     public function initials(): string
     {
         return Str::of($this->nama ?? '')

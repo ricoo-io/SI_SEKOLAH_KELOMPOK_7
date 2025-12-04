@@ -93,8 +93,8 @@
 
                             <div class="grid flex-1 text-start leading-tight">
                                 <span class="truncate font-semibold text-zinc-900 dark:text-white">{{ auth()->user()->name }}</span>
-                                <span class="truncate text-xs text-zinc-600 dark:text-zinc-400">@{{ auth()->user()->username }}</span>
-                                <span class="mt-1 inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-900/30 px-2 py-0.5 text-xs font-medium text-blue-700 dark:text-blue-400">
+                                {{-- <span class="truncate text-xs text-zinc-600 dark:text-zinc-400">{{ auth()->user()->username }}</span> --}}
+                                <span class="mt-1 inline-flex items-center rounded-sm bg-blue-100 dark:bg-blue-900/30 px-2 py-0.5 text-xs font-medium text-blue-700 dark:text-blue-400">
                                     Administrator
                                 </span>
                             </div>
@@ -139,7 +139,7 @@
 
                             <div class="grid flex-1 text-start leading-tight">
                                 <span class="truncate font-semibold text-zinc-900 dark:text-white">{{ auth()->user()->name }}</span>
-                                <span class="truncate text-xs text-zinc-600 dark:text-zinc-400">@{{ auth()->user()->username }}</span>
+                                <span class="truncate text-xs text-zinc-600 dark:text-zinc-400">@{{ auth()->user()->nip }}</span>
                                 <span class="mt-1 inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-900/30 px-2 py-0.5 text-xs font-medium text-blue-700 dark:text-blue-400">
                                     Administrator
                                 </span>
